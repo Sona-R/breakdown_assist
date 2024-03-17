@@ -1,15 +1,12 @@
-
-import 'package:breakdown_assist/admin/admin_home.dart';
-import 'package:breakdown_assist/admin/admin_home_user.dart';
 import 'package:flutter/material.dart';
-class Admin_login extends StatefulWidget {
-  const Admin_login({super.key});
+class Mech_login extends StatefulWidget {
+  const Mech_login({super.key});
 
   @override
-  State<Admin_login> createState() => _Admin_loginState();
+  State<Mech_login> createState() => _Mech_loginState();
 }
 
-class _Admin_loginState extends State<Admin_login> {
+class _Mech_loginState extends State<Mech_login> {
   final _formkey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -23,9 +20,9 @@ class _Admin_loginState extends State<Admin_login> {
                 SizedBox(
                   height: 40,
 
-              ),
+                ),
                 SizedBox(
-                  height: 150,
+                    height: 150,
                     width: 150,
                     child: Image.asset("assets/images/breakdownvehicle.png")),
                 SizedBox(
@@ -83,6 +80,10 @@ class _Admin_loginState extends State<Admin_login> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 210),
+                  child: Text("Forgot password ?",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                ),
                 SizedBox(
                   height: 60,
                 ),
@@ -91,23 +92,36 @@ class _Admin_loginState extends State<Admin_login> {
                   height: 45,
                   child: ElevatedButton(onPressed: (){
                     if(_formkey.currentState!.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Admin_home()),
-                      );
+
 
                     }
 
 
 
                   }, child: Text("LOGIN",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.blue),)),
+
                 ),
+                SizedBox(
+                  height: 15,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left:90 ),
+                  child: Row(
+                    children: [
+                      Text("Do you have account?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),),
+                      TextButton(onPressed: (){}, child: Text("Sign up",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
+
+
+                    ],
+                  ),
+                )
               ],
             ),
 
           ),
         ),
       ),
+
 
     );
   }

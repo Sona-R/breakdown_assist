@@ -38,6 +38,10 @@ body: SingleChildScrollView(
               height: 20,
             ),
             Padding(
+              padding: const EdgeInsets.only(right: 255),
+              child: Text("Enter username",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+            ),
+            Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 obscureText: true,
@@ -48,8 +52,8 @@ body: SingleChildScrollView(
                   return null;
                 },
                 decoration: InputDecoration(
-                  hintText: "Enter Username",
-                  labelText: "Username",
+                  hintText: "Username",
+
 
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -57,6 +61,10 @@ body: SingleChildScrollView(
 
                 ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 220),
+              child: Text("Enter phone number",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
             ),
 
             Padding(
@@ -69,14 +77,17 @@ body: SingleChildScrollView(
                   return null;
                 },
                 decoration: InputDecoration(
-                    hintText: "Enter phone number",
-                    labelText: "phone number",
+                    hintText: "phone number",
 
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),
                     )
                 ),
               ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 285),
+              child: Text("Enter email",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
             ),
 
             Padding(
@@ -89,8 +100,8 @@ body: SingleChildScrollView(
                   return null;
                 },
                 decoration: InputDecoration(
-                    hintText: "Enter Email",
-                    labelText: "Email",
+                    hintText: " Email",
+
 
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8.0)),

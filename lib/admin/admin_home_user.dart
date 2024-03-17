@@ -14,28 +14,7 @@ class _Admin_home_userState extends State<Admin_home_user> {
         child: Center(
           child: Column(
             children: [
-              // SizedBox(
-              //   height: 70,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(right: 280),
-              //   child: SizedBox(
-              //     height: 80,
-              //     width: 80,
-              //     child: CircleAvatar(
-              //       backgroundImage: ExactAssetImage("assets/images/person.png"),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 110),
-              //   child: Row(
-              //     children: [
-              //      ElevatedButton(onPressed: (){}, child:Text("User",style: TextStyle(color: Colors.blue),)),
-              //       ElevatedButton(onPressed: (){}, child:Text("Mechanic",style: TextStyle(color: Colors.blue),))
-              //     ],
-              //   ),
-              // ),
+
               Container(
                 height: 900,
                 width: 470,

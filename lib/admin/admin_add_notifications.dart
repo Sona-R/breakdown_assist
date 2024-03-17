@@ -38,14 +38,25 @@ body: SingleChildScrollView(
       ),
       Padding(
         padding: const EdgeInsets.all(12.0),
-        child: TextFormField(
-          decoration: InputDecoration(
-            hintText: "content...",
-  
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        child: Container(
+
+decoration: BoxDecoration(
+  border: Border.all(color: Colors.black)
+),
+
+
+          height: 200,
+
+
+
+          child: TextFormField(
+            maxLines: 5,
+            decoration: InputDecoration(
+              hintText: "content...",
+
+              border: InputBorder.none
+
             ),
-  
           ),
         ),
       ),
@@ -57,7 +68,9 @@ body: SingleChildScrollView(
           child: ElevatedButton(onPressed: (){
             Navigator.pop(context);
 
-          }, child: Text("Submit",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),)))
+          }, child: Text("Submit",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),))),
+
+
   
   
   

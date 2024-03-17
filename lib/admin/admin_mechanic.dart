@@ -38,6 +38,10 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
                     height: 20,
                   ),
                   Padding(
+                    padding: const EdgeInsets.only(right: 255),
+                    child: Text("Enter username",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       obscureText: true,
@@ -48,8 +52,8 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "Enter Mech username",
-                        labelText: "Username",
+                        hintText: " Mech username",
+
 
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -57,6 +61,10 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
 
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 220),
+                    child: Text("Enter phone number",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   ),
 
                   Padding(
@@ -69,14 +77,18 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: "Enter phone number",
-                          labelText: "phone number",
+                          hintText: " phone number",
+
 
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           )
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 285),
+                    child: Text("Enter Email",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   ),
 
                   Padding(
@@ -89,14 +101,18 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: "Enter Email",
-                          labelText: "Email",
+                          hintText: " Email",
+
 
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           )
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 210),
+                    child: Text("Enter work experience",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -108,14 +124,18 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: "experience",
-                          labelText: "Work experience",
+                          hintText: " work experience",
+
 
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           )
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 170),
+                    child: Text("Enter your work shop name",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -127,14 +147,18 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: "Enter shop name",
-                          labelText: "Work shop name",
+                          hintText: "work shop name",
+
 
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
                           )
                       ),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 230),
+                    child: Text("Enter your location",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -146,8 +170,8 @@ class _Admin_mechanicState extends State<Admin_mechanic> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: "Enter your location",
-                          labelText: "your location",
+                          hintText: " your location",
+
 
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8.0)),
