@@ -10,103 +10,56 @@ class _Mech_home_acceptedState extends State<Mech_home_accepted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-
-              Container(
-                height: 900,
-                width: 470,
-                child: ListView.separated(
-                    separatorBuilder: (context,index)=>Divider(
-                      indent: 13,
-                      endIndent: 60,
-                      color:Colors.white ,
-                      thickness: 20,
-                      height: 50,
+      body: ListView.separated(
+          separatorBuilder: (context,index)=> Divider(thickness: 5,color: Colors.white,),
+          itemCount: 4,
+          itemBuilder:  (BuildContext context,int index){
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+              child: Card(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
                     ),
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context,int index){
-                      return
-                        Container(
+                    Column(
+                      children: [
+                        SizedBox(height: 20,),
+                        CircleAvatar(
+                          backgroundImage: AssetImage("assets/images/man.png"),
+                          radius: 37,
+                        ),
+                        Text("Name",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))
+                      ],
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("Fuel Leaking",style: TextStyle(fontSize: 15,),),
+                        Text("Date",style: TextStyle(fontSize: 15,)),
+                        Text("Time",style: TextStyle(fontSize: 15,)),
+                        Text("Place",style: TextStyle(fontSize: 15,)),
+                      ],
+                    ),
 
-                          height: 150,
-                          width: 200,
-
-
-                          child: Row(
-
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            // crossAxisAlignment: CrossAxisAlignment.center,
-
-
-                            children: [
-                              SizedBox(
-                                height:50,
-                                width: 50,
-                                child:
-
-                                Column(
-                                  children: [
-                                    Image.asset("assets/images/man.png"),
-
-
-
-                                  ],
-                                ),
-
-
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Column(
-                                  children: [
-                                    Text("Fuel leaking",style: TextStyle(fontWeight: FontWeight.bold),),
-                                    Text("Date",style: TextStyle(fontWeight: FontWeight.bold),),
-                                    Text("Time",style: TextStyle(fontWeight: FontWeight.bold),),
-                                    Text("Place",style: TextStyle(fontWeight: FontWeight.bold),),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: 25,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.redAccent,
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(12)
-                                      ),
-                                    ),
-                                    onPressed: (){}, child: Text("payment pending",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),)),
-                              )
-
-                            ],
-
+                      ElevatedButton(onPressed: (){}, child: Text("Payment pending"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)
                           ),
+                        ),),
 
-                        );
-                    }
-
-
+                  ],
                 ),
-
-
-
-              )
-            ],
-          ),
-        ),
+              ),
+            );
+          }
       ),
-
-
     );
   }
 }

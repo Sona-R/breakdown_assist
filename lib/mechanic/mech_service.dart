@@ -15,7 +15,7 @@ class _Mech_serviceState extends State<Mech_service> {
 
 showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
 
-  backgroundColor: Colors.white,
+  backgroundColor: Colors.blue.shade100,
   title: Text("Add service",style: TextStyle(fontWeight: FontWeight.bold),),
   content: Padding(
     padding: const EdgeInsets.all(12.0),
@@ -23,7 +23,8 @@ showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
 
 
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black)
+        color: Colors.white,
+          border: Border.all(color: Colors.white)
       ),
 
 

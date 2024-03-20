@@ -10,91 +10,53 @@ class _Admin_home_mechanicState extends State<Admin_home_mechanic> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              // SizedBox(
-              //   height: 70,
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(right: 280),
-              //   child: SizedBox(
-              //     height: 80,
-              //     width: 80,
-              //     child: CircleAvatar(
-              //       backgroundImage: ExactAssetImage("assets/images/person.png"),
-              //     ),
-              //   ),
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 110),
-              //   child: Row(
-              //     children: [
-              //       ElevatedButton(onPressed: (){}, child:Text("User",style: TextStyle(color: Colors.blue),)),
-              //       ElevatedButton(onPressed: (){}, child:Text("Mechanic",style: TextStyle(color: Colors.blue),))
-              //     ],
-              //   ),
-              // ),
-              Container(
-                height: 900,
-                width: 470,
-                child: ListView.separated(
-                    separatorBuilder: (context,index)=>Divider(
-                      indent: 13,
-                      endIndent: 60,
-                      color:Colors.white ,
-                      thickness: 20,
-                      height: 50,
+      body: ListView.separated(
+          separatorBuilder: (context,index)=> Divider(thickness: 5,color: Colors.white,),
+          itemCount: 4,
+          itemBuilder:  (BuildContext context,int index){
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+              child: Card(
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
                     ),
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context,int index){
-                      return
-                        Container(
-                          height: 100,
-                          width: 200,
-                          child: Row(
-
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                    SizedBox(height: 20,),
+                    CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/man.png"),
+                      radius: 30,
+                    ),
 
 
-                            children: [
-                              SizedBox(
-                                  height:50,
-                                  width: 50,
-                                  child: Image.asset("assets/images/man.png")),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Name",style: TextStyle(fontWeight: FontWeight.bold),),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Text("Name",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 60),
+                          child: Text("Mobile number",style: TextStyle(fontSize: 15,)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 7),
+                          child: Text("Service",style: TextStyle(fontSize: 15,)),
+                        ),
 
-                                  Text("Mobile number"),
-                                  Text("service"),
-                                ],
-                              )
-                            ],
-
-                          ),
-
-                        );
-                    }
+                        SizedBox(height: 25,),
+                      ],
+                    ),
 
 
+
+                  ],
                 ),
-
-
-
-              )
-            ],
-          ),
-        ),
+              ),
+            );
+          }
       ),
-
 
     );
   }

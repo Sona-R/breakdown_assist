@@ -8,6 +8,7 @@ class Mech_rating extends StatefulWidget {
 }
 
 class _Mech_ratingState extends State<Mech_rating> {
+  double rating = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,125 +18,81 @@ class _Mech_ratingState extends State<Mech_rating> {
         title: Text("Rating",style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
+      body:
 
-            children: [
-              SizedBox(
-                height: 15,
-              ),
-              Text("The rating given to you"),
-              Container(
-                height: 900,
-                width: 470,
-                child: ListView.separated(
-                    separatorBuilder: (context,index)=>Divider(
-                      indent: 13,
-                      endIndent: 60,
-                      color:Colors.white ,
-                      thickness: 20,
-                      height: 50,
-                    ),
-                    itemCount: 10,
-                    itemBuilder: (BuildContext context,int index){
-                      return
-                        Container(
-                          color: Colors.blue.shade50,
-
-                          height: 130,
-                          width: 180,
-
-
-                          child: Row(
-
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            // crossAxisAlignment: CrossAxisAlignment.center,
-
-
-                            children: [
-                              SizedBox(
-                                height:50,
-                                width: 50,
-                                child:
-
-                                Column(
-                                  children: [
-                                    Image.asset("assets/images/man.png"),
-
-
-
-                                  ],
-                                ),
-
-
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: 20,),
-                                        Text("engine work",style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text("Date",style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text("Time",style: TextStyle(fontWeight: FontWeight.bold),),
-                                        Text("Place",style: TextStyle(fontWeight: FontWeight.bold),),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text("Rating"),
-                      SizedBox(
-
-                        child: RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) {
-                        print(rating);
-                        },
-                        ),
-                      ),
-                      ],
-
-                      ),
-
-                                ],
-                              ),
-                              SizedBox(
-                                width: 25,
-                              ),
-
-
-                            ],
-
+          ListView.separated(
+                separatorBuilder: (context,index)=> Divider(thickness: 5,color: Colors.white,),
+                itemCount: 3,
+                itemBuilder:  (BuildContext context,int index){
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    child: Card(
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
                           ),
+                          Column(
+                            children: [
+                              SizedBox(height: 20,),
+                              CircleAvatar(
+                                backgroundImage: AssetImage("assets/images/man.png"),
+                                radius: 35,
+                              ),
+                              Text("Name",style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold))
+                            ],
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("engine",style: TextStyle(fontSize: 15,),),
+                              Text("Date",style: TextStyle(fontSize: 15,)),
+                              Text("Time",style: TextStyle(fontSize: 15,)),
+                              Text("Place",style: TextStyle(fontSize: 15,)),
+                            ],
+                          ),
+                      SizedBox(width: 35,),
 
-                        );
-                    }
+                      Column(
+                        children: [
+                          Text("Rating"),
+                          SizedBox(
 
 
-                ),
+                            child: RatingBar.builder(
+                              itemSize:20 ,
+                              initialRating: 3,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              onRatingUpdate: (rating) {
+                                setState(() {
+                                  this.rating = rating;
+                                });
+
+                              },
+                            ),
+                          ),
+                          Text("$rating")
+                        ],
+                      ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+            ),
 
 
-
-              )
-            ],
-          ),
-        ),
-      ),
 
     );
   }

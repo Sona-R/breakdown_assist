@@ -47,16 +47,16 @@ class _Admin_paymentState extends State<Admin_payment> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                           children: [ Text("Name",style: TextStyle(fontWeight: FontWeight.bold),),
+                           children: [ Text("Name",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
                               SizedBox(
                                 width: 240,
                               ),
-                              Text("15/3/2024",style: TextStyle(fontWeight: FontWeight.bold),),
+                              Text("15/3/2024",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),),
                     ],
                             ),
-                            Text("5455/-",),
-                            Text("service"),
-                            Text("Mechanic name"),
+                            Text("5455/-",style: TextStyle(fontSize: 15),),
+                            Text("service",style: TextStyle(fontSize: 15),),
+                            Text("Mechanic name",style: TextStyle(fontSize: 15),),
                           ],
                         )
                       ],

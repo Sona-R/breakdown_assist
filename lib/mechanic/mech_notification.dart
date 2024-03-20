@@ -25,7 +25,7 @@ class _Mech_notificationState extends State<Mech_notification> {
           ),
 
         Container(
-        height: 1000,
+        height: 100,
         width: 470,
         child: ListView.separated(
         separatorBuilder: (context,index)=>Divider(

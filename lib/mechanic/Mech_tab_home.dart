@@ -12,9 +12,19 @@ class _Mech_tab_homeState extends State<Mech_tab_home> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
+
       length: 2,
       initialIndex: 0,
       child: Scaffold(
+        appBar: AppBar(
+          leading: CircleAvatar(
+
+            backgroundImage: ExactAssetImage("assets/images/person.png"),
+          ),
+          actions: [
+            IconButton(onPressed: (){}, icon: Icon(Icons.notification_add,color: Colors.amber,))
+          ],
+        ),
         body: Column(
           children: [
 
