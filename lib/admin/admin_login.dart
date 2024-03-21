@@ -10,7 +10,21 @@ class Admin_login extends StatefulWidget {
 }
 
 class _Admin_loginState extends State<Admin_login> {
+  final SnackBar _snackBar = SnackBar(content: Text("Successfully registered"),duration: Duration(seconds: 3),);
+
+  var usernamectrl =TextEditingController();
+  var passwordctrl =TextEditingController();
   final _formkey=GlobalKey<FormState>();
+  login(){
+    print("object");
+    if (usernamectrl.text =='admin@gmail.com' && passwordctrl.text =='123'){
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Admin_home()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +56,7 @@ class _Admin_loginState extends State<Admin_login> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: usernamectrl,
                     validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter username';
@@ -65,6 +80,7 @@ class _Admin_loginState extends State<Admin_login> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: passwordctrl,
                     obscureText: true,
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
@@ -90,13 +106,9 @@ class _Admin_loginState extends State<Admin_login> {
                   width: 300,
                   height: 45,
                   child: ElevatedButton(onPressed: (){
-                    if(_formkey.currentState!.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Admin_home()),
-                      );
-
-                    }
+                    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+                    login();
+                    // if(_formkey.currentState!.validate()) { }
 
 
 

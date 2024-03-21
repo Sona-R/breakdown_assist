@@ -1,3 +1,5 @@
+import 'package:breakdown_assist/user/user_login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class User_signup extends StatefulWidget {
   const User_signup({super.key});
@@ -7,6 +9,29 @@ class User_signup extends StatefulWidget {
 }
 
 class _User_signupState extends State<User_signup> {
+  var usernamectrl =TextEditingController();
+  var phonectrl =TextEditingController();
+  var emailctrl =TextEditingController();
+  var passwordctrl =TextEditingController();
+  Future<dynamic> usersignup() async {
+    await FirebaseFirestore.instance.collection('Usersignup').add({
+      "username": usernamectrl.text,
+      "phone": phonectrl.text,
+      "email": emailctrl.text,
+      "password": passwordctrl.text,
+      "status": 0
+    }).then((value) {
+      print("success");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const User_login())
+      );
+    });
+
+  }
+  final SnackBar _snackBar = SnackBar(content: Text("Successfully registered"),duration: Duration(seconds: 3),);
+
+
   final formkey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -39,6 +64,7 @@ class _User_signupState extends State<User_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: usernamectrl,
                     validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter username';
@@ -62,7 +88,8 @@ class _User_signupState extends State<User_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: phonectrl,
+
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please Phone number';
@@ -87,7 +114,8 @@ class _User_signupState extends State<User_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: emailctrl,
+
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter email';
@@ -113,7 +141,8 @@ class _User_signupState extends State<User_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: passwordctrl,
+
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter password';
@@ -139,6 +168,8 @@ class _User_signupState extends State<User_signup> {
                   child: ElevatedButton(
                     onPressed: (){
                       if(formkey.currentState!.validate()) {
+                        ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+                        usersignup();
 
 
                       }

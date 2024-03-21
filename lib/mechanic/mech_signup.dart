@@ -1,3 +1,5 @@
+import 'package:breakdown_assist/mechanic/mech_login.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Mech_signup extends StatefulWidget {
   const Mech_signup({super.key});
@@ -7,6 +9,35 @@ class Mech_signup extends StatefulWidget {
 }
 
 class _Mech_signupState extends State<Mech_signup> {
+  var usernamectrl =TextEditingController();
+  var phonectrl =TextEditingController();
+  var emailctrl =TextEditingController();
+  var experencectrl =TextEditingController();
+  var shopenamectrl =TextEditingController();
+  var passwordctrl =TextEditingController();
+
+
+  Future<dynamic> mechsignup() async{
+    await FirebaseFirestore.instance.collection('Mechsignup').add({
+    "username":usernamectrl.text,
+      "phone":phonectrl.text,
+      "email":emailctrl.text,
+      "experience":experencectrl.text,
+      "shopname":shopenamectrl.text,
+      "password":passwordctrl.text,
+      "status": 0
+
+    }).then((value) {
+      print("success");
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Mech_login())
+      );
+    });
+
+  }
+  final SnackBar _snackBar = SnackBar(content: Text("Successfully registered"),duration: Duration(seconds: 3),);
+
   final formkey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -39,6 +70,7 @@ class _Mech_signupState extends State<Mech_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: usernamectrl,
                     validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter username';
@@ -62,7 +94,8 @@ class _Mech_signupState extends State<Mech_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: phonectrl,
+
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please Phone number';
@@ -87,7 +120,8 @@ class _Mech_signupState extends State<Mech_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: emailctrl,
+
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter email';
@@ -112,7 +146,8 @@ class _Mech_signupState extends State<Mech_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: experencectrl,
+
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter Your work experience';
@@ -137,7 +172,8 @@ class _Mech_signupState extends State<Mech_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: shopenamectrl,
+
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter your work shop name';
@@ -162,7 +198,8 @@ class _Mech_signupState extends State<Mech_signup> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+                    controller: passwordctrl,
+                    
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter password';
@@ -188,6 +225,8 @@ class _Mech_signupState extends State<Mech_signup> {
                   child: ElevatedButton(
                       onPressed: (){
                     if(formkey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+                      mechsignup();
 
 
                     }

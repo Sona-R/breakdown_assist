@@ -1,6 +1,7 @@
 import 'package:breakdown_assist/admin/admin_login.dart';
 import 'package:breakdown_assist/admin/admin_mechanic.dart';
 import 'package:breakdown_assist/admin/admin_user.dart';
+import 'package:breakdown_assist/firebase_options.dart';
 import 'package:breakdown_assist/mechanic/Mech_home_requests.dart';
 import 'package:breakdown_assist/mechanic/Mech_tab_home.dart';
 import 'package:breakdown_assist/mechanic/mech_edit_profile.dart';
@@ -29,13 +30,16 @@ import 'package:breakdown_assist/user/user_payment.dart';
 import 'package:breakdown_assist/user/user_profile.dart';
 import 'package:breakdown_assist/user/user_rating.dart';
 import 'package:breakdown_assist/user/user_signup.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'admin/Admin home tab.dart';
 import 'admin/admin_add_notifications.dart';
 import 'admin/admin_home.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Mech_home(),
+      home:Admin_home(),
 
     );
   }

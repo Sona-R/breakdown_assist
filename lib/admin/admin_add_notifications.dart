@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class Admin_add_notification extends StatefulWidget {
   const Admin_add_notification({super.key});
@@ -7,74 +8,116 @@ class Admin_add_notification extends StatefulWidget {
 }
 
 class _Admin_add_notificationState extends State<Admin_add_notification> {
+  final _formkey=GlobalKey<FormState>();
+
+  var matterctrl =TextEditingController();
+  var contentctrl =TextEditingController();
+  Future<dynamic> submit() async{
+    await FirebaseFirestore.instance.collection("Notification").add({
+      "matter":matterctrl.text,
+      "content":contentctrl.text,
+      "status": 0
+    }).then((value){
+      print("success");
+
+      Navigator.pop(context);
+    });
+
+  }
+  final SnackBar _snackBar=SnackBar(content: Text("successfully submitted"),duration: Duration(seconds: 3),);
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 body: SingleChildScrollView(
-  child: Column(
-    children: [
-      SizedBox(height: 100,),
-      Padding(
-        padding: const EdgeInsets.only(right: 275),
-        child: Text("Enter matter",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: TextFormField(
-          decoration: InputDecoration(
-            hintText: "matter",
-  
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            ),
-  
-          ),
+  child: Form(
+    key: _formkey,
+    child: Column(
+      children: [
+        SizedBox(height: 100,),
+        Padding(
+          padding: const EdgeInsets.only(right: 275),
+          child: Text("Enter matter",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
         ),
-      ),
-      SizedBox(height: 30,),
-      Padding(
-        padding: const EdgeInsets.only(right: 270),
-        child: Text("Enter content",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Container(
-
-decoration: BoxDecoration(
-  border: Border.all(color: Colors.black)
-),
-
-
-          height: 200,
-
-
-
+        Padding(
+          padding: const EdgeInsets.all(12.0),
           child: TextFormField(
-            maxLines: 5,
+            controller: matterctrl,
+            validator:  (value) {
+              if (value == null || value.isEmpty) {   // Validation Logic
+                return 'required';
+              }
+              return null;
+            },
             decoration: InputDecoration(
-              hintText: "content...",
+              hintText: "matter",
 
-              border: InputBorder.none
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
 
             ),
           ),
         ),
-      ),
-      SizedBox(
-        height: 180,
-      ),
-      SizedBox(
-        width: 200,
-          child: ElevatedButton(onPressed: (){
-            Navigator.pop(context);
+        SizedBox(height: 30,),
+        Padding(
+          padding: const EdgeInsets.only(right: 270),
+          child: Text("Enter content",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Container(
 
-          }, child: Text("Submit",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),))),
+    decoration: BoxDecoration(
+    border: Border.all(color: Colors.black)
+    ),
 
 
-  
-  
-  
-    ],
+            height: 200,
+
+
+
+            child: TextFormField(
+              controller: contentctrl,
+              validator:  (value) {
+                if (value == null || value.isEmpty) {   // Validation Logic
+                  return 'required';
+                }
+                return null;
+              },
+              maxLines: 5,
+              decoration: InputDecoration(
+                hintText: "content...",
+
+                border: InputBorder.none
+
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 180,
+        ),
+        SizedBox(
+          width: 200,
+            child: ElevatedButton(onPressed: (){
+    if(_formkey.currentState!.validate()) {
+      submit();
+      ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+    }
+
+
+            }, child: Text("Submit",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),))),
+
+
+
+
+
+      ],
+    ),
   ),
 ),
     );

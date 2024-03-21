@@ -1,3 +1,4 @@
+import 'package:breakdown_assist/mechanic/mech_signup.dart';
 import 'package:flutter/material.dart';
 class Mech_login extends StatefulWidget {
   const Mech_login({super.key});
@@ -7,6 +8,8 @@ class Mech_login extends StatefulWidget {
 }
 
 class _Mech_loginState extends State<Mech_login> {
+
+
   final _formkey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -94,6 +97,7 @@ class _Mech_loginState extends State<Mech_login> {
                     if(_formkey.currentState!.validate()) {
 
 
+
                     }
 
 
@@ -109,7 +113,12 @@ class _Mech_loginState extends State<Mech_login> {
                   child: Row(
                     children: [
                       Text("Do you have account?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),),
-                      TextButton(onPressed: (){}, child: Text("Sign up",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
+                      TextButton(onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>const Mech_signup ()),
+                        );
+                      }, child: Text("Sign up",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
 
 
                     ],

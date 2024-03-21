@@ -43,7 +43,7 @@ class _Admin_notificationState extends State<Admin_notification> {
                       return
                           ListTile(
                             title: Text("Heading",style: TextStyle(fontWeight: FontWeight.bold),),
-                            subtitle: Text("place",style: TextStyle(fontSize: 15),),
+                            subtitle: Text("subtitle",style: TextStyle(fontSize: 15),),
                           );
 
 

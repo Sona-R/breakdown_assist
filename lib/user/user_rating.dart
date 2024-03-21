@@ -14,7 +14,7 @@ class _User_ratingState extends State<User_rating> {
 
       appBar: AppBar(
         backgroundColor: Colors.blue.shade200,
-        title:Text("Mechanic Bill",style: TextStyle(fontWeight: FontWeight.bold),),
+        title:Text("Your Rating",style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

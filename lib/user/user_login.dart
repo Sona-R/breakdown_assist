@@ -7,6 +7,8 @@ class User_login extends StatefulWidget {
 }
 
 class _User_loginState extends State<User_login> {
+  final SnackBar _snackBar = SnackBar(content: Text("Successfully registered"),duration: Duration(seconds: 3),);
+
   final _formkey=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -92,6 +94,7 @@ class _User_loginState extends State<User_login> {
                   height: 45,
                   child: ElevatedButton(onPressed: (){
                     if(_formkey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(_snackBar);
 
 
                     }

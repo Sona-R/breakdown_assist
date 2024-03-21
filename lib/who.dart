@@ -1,4 +1,6 @@
 import 'package:breakdown_assist/admin/admin_login.dart';
+import 'package:breakdown_assist/mechanic/mech_login.dart';
+import 'package:breakdown_assist/user/user_login.dart';
 import 'package:flutter/material.dart';
 class Who extends StatefulWidget {
   const Who({super.key});
@@ -33,13 +35,23 @@ class _WhoState extends State<Who> {
             ),
             SizedBox(
               width: 380,
-                child: ElevatedButton(onPressed: (){}, child: Text("Mechanic",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
+                child: ElevatedButton(onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Mech_login()),
+                  );
+                }, child: Text("Mechanic",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 18),),
                 ),
             ),
             SizedBox(height: 30,),
             SizedBox(
               width: 380,
-                child: ElevatedButton(onPressed: (){}, child: Text("User",style: TextStyle(color: Colors.blueAccent,fontWeight: FontWeight.bold,fontSize: 18),))),
+                child: ElevatedButton(onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const User_login()),
+                  );
+                }, child: Text("User",style: TextStyle(color: Colors.blueAccent,fontWeight: FontWeight.bold,fontSize: 18),))),
             SizedBox(
               height: 30,
             ),
