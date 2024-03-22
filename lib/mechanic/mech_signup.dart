@@ -42,12 +42,17 @@ class _Mech_signupState extends State<Mech_signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: SingleChildScrollView(
+
         child: Form(
           key: formkey,
           child: Center(
+
             child: Column(
+
               children: [
+
                 SizedBox(
                   height: 40,
 
@@ -78,10 +83,12 @@ class _Mech_signupState extends State<Mech_signup> {
                       return null;
                     },
                     decoration: InputDecoration(
+
                         hintText: " username",
 
 
                         border: OutlineInputBorder(
+
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
                         )
                     ),
@@ -233,8 +240,15 @@ class _Mech_signupState extends State<Mech_signup> {
 
 
 
-                  }, child: Text("Sign Up",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.blue),
+                  }, child: Text("Sign Up",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),
                   ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                    ),
 
                   ),
 

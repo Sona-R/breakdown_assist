@@ -12,15 +12,8 @@ class Mech_request extends StatefulWidget {
 }
 
 class _Mech_requestState extends State<Mech_request> {
-//   int _indexNum=0;
-//   List tabs = [
-//
-// Mech_tab_home(),
-//    Mech_service(),
-//     Mech_rating(),
-//
 
-  // ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,34 +32,6 @@ class _Mech_requestState extends State<Mech_request> {
         ],
       ),
 
-      // bottomNavigationBar: BottomNavigationBar(items: [
-      //   BottomNavigationBarItem(
-      //     label: "Request",
-      //     icon: Icon(Icons.person_pin_outlined),
-      //   ),
-      //   BottomNavigationBarItem(
-      //     label: "Service",
-      //     icon: Icon(Icons.settings_rounded)
-      //     ,),
-      //   BottomNavigationBarItem(
-      //       label: "Rating",
-      //       icon: Icon(Icons.star))
-      // ],
-      //     iconSize: 30,
-      //     // showSelectedLabels: false,
-      //
-      //
-      //     currentIndex: _indexNum,
-      //     onTap: (int index){
-      //
-      //       setState(() {
-      //         _indexNum= index;
-      //       });
-      //
-      //     }
-      // ),
-      // body: tabs.elementAt(_indexNum),
-      //
 
     );
   }

@@ -70,7 +70,7 @@ showDialog(context: context, builder: (BuildContext context)=>AlertDialog(
         height: 350,
         width: 370,
         child: Padding(
-          padding: const EdgeInsets.only(left: 40,top: 70),
+          padding: const EdgeInsets.only(left: 20,top: 70),
           child: Card(
             color: Colors.blue.shade100,
             child: Column(

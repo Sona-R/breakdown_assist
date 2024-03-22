@@ -52,7 +52,8 @@ class _Mech_home_acceptedState extends State<Mech_home_accepted> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)
                           ),
-                        ),),
+                        ),
+                      ),
 
                   ],
                 ),

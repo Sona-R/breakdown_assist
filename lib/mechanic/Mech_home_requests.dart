@@ -40,10 +40,10 @@ class _Mech_home_requestsState extends State<Mech_home_requests> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Fuel Leaking",style: TextStyle(fontSize: 16,),),
-                        Text("Date",style: TextStyle(fontSize: 16,)),
-                        Text("Time",style: TextStyle(fontSize: 16,)),
-                        Text("Place",style: TextStyle(fontSize: 16,)),
+                        Text("Fuel Leaking",style: TextStyle(fontSize: 15,),),
+                        Text("Date",style: TextStyle(fontSize: 15,)),
+                        Text("Time",style: TextStyle(fontSize: 15,)),
+                        Text("Place",style: TextStyle(fontSize: 15,)),
                       ],
                     ),
 

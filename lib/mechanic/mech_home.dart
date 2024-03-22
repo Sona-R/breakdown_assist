@@ -26,7 +26,7 @@ class _Mech_homeState extends State<Mech_home> {
       bottomNavigationBar: BottomNavigationBar(items: [
         BottomNavigationBarItem(
           label: "Request",
-          icon: Icon(Icons.person_pin_outlined),
+          icon: Icon(Icons.person_search),
         ),
         BottomNavigationBarItem(
           label: "Service",

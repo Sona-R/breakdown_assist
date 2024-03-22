@@ -13,9 +13,11 @@ class _User_signupState extends State<User_signup> {
   var phonectrl =TextEditingController();
   var emailctrl =TextEditingController();
   var passwordctrl =TextEditingController();
+  var locationctrl =TextEditingController();
   Future<dynamic> usersignup() async {
     await FirebaseFirestore.instance.collection('Usersignup').add({
       "username": usernamectrl.text,
+      "location": locationctrl.text,
       "phone": phonectrl.text,
       "email": emailctrl.text,
       "password": passwordctrl.text,
@@ -78,6 +80,31 @@ class _User_signupState extends State<User_signup> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
                         )
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 220),
+                  child: Text("Enter your location",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: locationctrl,
+
+                    validator:  (value) {
+                      if (value == null || value.isEmpty) {   // Validation Logic
+                        return 'Please enter location';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: " location",
+
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      ),
+
                     ),
                   ),
                 ),
@@ -176,8 +203,15 @@ class _User_signupState extends State<User_signup> {
 
 
 
-                    }, child: Text("Sign Up",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.blue),
+                    }, child: Text("Sign Up",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),
                   ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                    ),
 
                   ),
 

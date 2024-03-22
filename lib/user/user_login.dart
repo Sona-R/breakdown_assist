@@ -1,3 +1,4 @@
+import 'package:breakdown_assist/user/user_signup.dart';
 import 'package:flutter/material.dart';
 class User_login extends StatefulWidget {
   const User_login({super.key});
@@ -84,7 +85,12 @@ class _User_loginState extends State<User_login> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 210),
-                  child: Text("Forgot password ?",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                  child: GestureDetector(
+
+                      onTap: (){
+
+                      },
+                      child: Text("Forgot password ?",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.blue),)),
                 ),
                 SizedBox(
                   height: 60,
@@ -101,7 +107,15 @@ class _User_loginState extends State<User_login> {
 
 
 
-                  }, child: Text("LOGIN",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.blue),)),
+                  }, child: Text("LOGIN",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                    ),
+                  ),
 
                 ),
                 SizedBox(
@@ -112,7 +126,12 @@ class _User_loginState extends State<User_login> {
                   child: Row(
                     children: [
                       Text("Do you have account?",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),),
-                      TextButton(onPressed: (){}, child: Text("Sign up",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
+                      TextButton(onPressed: (){
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const User_signup()),
+                        );
+                      }, child: Text("Sign up",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),))
 
 
                     ],

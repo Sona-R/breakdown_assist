@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 class Admin_add_notification extends StatefulWidget {
   const Admin_add_notification({super.key});
 
@@ -12,16 +13,23 @@ class _Admin_add_notificationState extends State<Admin_add_notification> {
 
   var matterctrl =TextEditingController();
   var contentctrl =TextEditingController();
+  final date = new DateTime.now();
+  TimeOfDay time = TimeOfDay.now();
   Future<dynamic> submit() async{
     await FirebaseFirestore.instance.collection("Notification").add({
       "matter":matterctrl.text,
       "content":contentctrl.text,
+      "time":time.format(context),
+      "date":DateFormat('dd/mm/yy').format(date),
+
       "status": 0
     }).then((value){
       print("success");
 
       Navigator.pop(context);
     });
+    matterctrl.clear();
+    contentctrl.clear();
 
   }
   final SnackBar _snackBar=SnackBar(content: Text("successfully submitted"),duration: Duration(seconds: 3),);
@@ -110,7 +118,17 @@ body: SingleChildScrollView(
     }
 
 
-            }, child: Text("Submit",style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold),))),
+            }, child: Text("Submit",style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)
+                ),
+              ),
+            ),
+        ),
 
 
 

@@ -85,7 +85,11 @@ class _Mech_loginState extends State<Mech_login> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 210),
-                  child: Text("Forgot password ?",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                  child: GestureDetector(
+                    onTap: (){
+
+                    },
+                      child: Text("Forgot password ?",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold,color: Colors.blue),)),
                 ),
                 SizedBox(
                   height: 60,
@@ -102,7 +106,15 @@ class _Mech_loginState extends State<Mech_login> {
 
 
 
-                  }, child: Text("LOGIN",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.blue),)),
+                  }, child: Text("LOGIN",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                      ),
+                    ),
+                  ),
 
                 ),
                 SizedBox(
