@@ -1,5 +1,9 @@
+import 'package:breakdown_assist/mechanic/mech_home.dart';
+import 'package:breakdown_assist/user/user_home.dart';
 import 'package:breakdown_assist/user/user_signup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class User_login extends StatefulWidget {
   const User_login({super.key});
 
@@ -8,9 +12,25 @@ class User_login extends StatefulWidget {
 }
 
 class _User_loginState extends State<User_login> {
-  final SnackBar _snackBar = SnackBar(content: Text("Successfully registered"),duration: Duration(seconds: 3),);
+  var usernamectrl = TextEditingController();
+  var passwordctrl = TextEditingController();
+  
+  
+  
+  // final SnackBar _snackBar = SnackBar(content: Text("Successfully registered"),duration: Duration(seconds: 3),);
 
   final _formkey=GlobalKey<FormState>();
+  
+  String id = '';
+  String username = '';
+  String location ='';
+  String phone ='';
+  String email ='';
+  // String password ='';
+  String path = '';
+  
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +62,7 @@ class _User_loginState extends State<User_login> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller:usernamectrl ,
                     validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter username';
@@ -65,7 +86,8 @@ class _User_loginState extends State<User_login> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
+
+                    controller: passwordctrl,
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter password';
@@ -100,10 +122,12 @@ class _User_loginState extends State<User_login> {
                   height: 45,
                   child: ElevatedButton(onPressed: (){
                     if(_formkey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(_snackBar);
-
-
+                      userlogin();
+                      // ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+                    //
+                    //
                     }
+
 
 
 
@@ -147,4 +171,46 @@ class _User_loginState extends State<User_login> {
 
     );
   }
-}
+  void userlogin() async {
+    final user = await FirebaseFirestore.instance
+        .collection('Usersignup')
+        .where('email', isEqualTo:usernamectrl.text)
+        .where('password', isEqualTo: passwordctrl.text)
+        .where('status', isEqualTo: 1)
+        .get();
+    if (user.docs.isNotEmpty) {
+      id = user.docs[0].id;
+      username = user.docs[0]['username'];
+      location = user.docs[0]['location'];
+      phone = user.docs[0]['phone'];
+      email = user.docs[0]['email'];
+      // password = user.docs[0]['password'];
+      // path = user.docs[0][''];
+
+      SharedPreferences data = await SharedPreferences.getInstance();
+      data.setString('id', id);
+      // data.setString('paath', path);
+
+      data.setString('username', username);
+      data.setString('location', location);
+      data.setString('phone', phone);
+      data.setString('email', email);
+      // data.setString('password', password);
+
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return User_home();
+      },
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(
+        "Username and password error", style: TextStyle(color: Colors.red),
+      )));
+    }
+
+
+
+
+    }
+  }
+

@@ -1,5 +1,6 @@
 import 'package:breakdown_assist/user/User_home_mechanic.dart';
 import 'package:breakdown_assist/user/user_home__request.dart';
+import 'package:breakdown_assist/user/user_profile.dart';
 import 'package:flutter/material.dart';
 class User_home extends StatefulWidget {
   const User_home({super.key});
@@ -17,8 +18,17 @@ class _User_homeState extends State<User_home> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blue.shade100,
-          leading: CircleAvatar(
-            backgroundImage: AssetImage("assets/images/person.png"),
+          leading: InkWell(
+
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => User_profile()),
+              );
+            },
+            child: CircleAvatar(
+              backgroundImage: AssetImage("assets/images/person.png"),
+            ),
           ),
           title: Container(
             decoration: BoxDecoration(

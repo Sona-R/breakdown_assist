@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'Mech_tab_home.dart';
 import 'mech_rating.dart';
+import 'mech_request.dart';
 import 'mech_service.dart';
 class Mech_home extends StatefulWidget {
   const Mech_home({super.key});
@@ -14,9 +13,10 @@ class _Mech_homeState extends State<Mech_home> {
   int _indexNum=0;
   List tabs = [
 
-    Mech_tab_home(),
+    Mech_request(),
     Mech_service(),
     Mech_rating(),
+
 
 
   ];

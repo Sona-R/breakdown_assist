@@ -1,4 +1,7 @@
+import 'package:breakdown_assist/user/user_home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class User_profile extends StatefulWidget {
   const User_profile({super.key});
 
@@ -7,13 +10,56 @@ class User_profile extends StatefulWidget {
 }
 
 class _User_profileState extends State<User_profile> {
-  final formkey=GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getSavedData();
+    super.initState();
+  }
+  var ID = '';
+
+  Future<void>getSavedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+
+
+    setState(() {
+      ID = prefs.getString('id')!;
+      print("get from sp");
+    });
+
+  }
+  DocumentSnapshot? user;
+  getupdateddata() async{
+    user =
+    await FirebaseFirestore.instance.collection("Usersignup").doc(ID).get();
+    print("get from fb");
+
+  }
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: formkey,
+    return FutureBuilder(
+
+        future:  getupdateddata(),
+    builder: (context,snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      if (snapshot.hasError) {
+        return Text("Error${snapshot.error}");
+      }
+
+
+      return Scaffold(
+        body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
@@ -25,51 +71,48 @@ class _User_profileState extends State<User_profile> {
                   radius: 60,
                   backgroundImage: ExactAssetImage("assets/images/man.png"),
                 ),
-                Text("Name",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                SizedBox(height: 20,),
+                Text(user!['username'], style: TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 19),),
 
                 SizedBox(
                   height: 30,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 280),
-                  child: Text("Enter Name",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  padding: const EdgeInsets.only(right: 325),
+                  child: Text(" Name", style: TextStyle(fontWeight: FontWeight
+                      .bold, fontSize: 18),),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please enter name';
-                      }
-                      return null;
-                    },
+
                     decoration: InputDecoration(
-                        hintText: " name",
+                        hintText: user!['username'],
+                        hintStyle: TextStyle(color: Colors.black),
 
 
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius: BorderRadius.all(
+                              Radius.circular(8.0)),
                         )
                     ),
                   ),
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(right: 220),
-                  child: Text("Enter phone number",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  padding: const EdgeInsets.only(right: 255),
+                  child: Text(
+                    " phone number", style: TextStyle(fontWeight: FontWeight
+                      .bold, fontSize: 18),),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
-                    validator:  (value) {
-                      if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please Phone number';
-                      }
-                      return null;
-                    },
+
                     decoration: InputDecoration(
-                      hintText: " phone number",
+                      hintText: user!['phone'],
+                      hintStyle: TextStyle(color: Colors.black),
 
 
                       border: OutlineInputBorder(
@@ -80,21 +123,18 @@ class _User_profileState extends State<User_profile> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 280),
-                  child: Text("Enter Email",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  padding: const EdgeInsets.only(right: 325),
+                  child: Text(
+                    " Email", style: TextStyle(fontWeight: FontWeight.bold,
+                      fontSize: 18),),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
-                    validator:  (value) {
-                      if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please enter email';
-                      }
-                      return null;
-                    },
+
                     decoration: InputDecoration(
-                      hintText: "Enter email",
+                      hintText: user!['email'],
+                      hintStyle: TextStyle(color: Colors.black),
 
 
                       border: OutlineInputBorder(
@@ -112,22 +152,24 @@ class _User_profileState extends State<User_profile> {
                   width: 300,
                   height: 45,
                   child: ElevatedButton(
-                    onPressed: (){
-                      if(formkey.currentState!.validate()) {
+                    onPressed: () {
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => User_home()),
+                        );
 
 
-                      }
 
-
-
-                    }, child: Text("Done",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),
+                    }, child: Text("Done", style: TextStyle(
+                    fontSize: 20, fontWeight: FontWeight.bold,),
 
                   ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(17)
+                          borderRadius: BorderRadius.circular(15)
                       ),
                     ),
 
@@ -143,8 +185,9 @@ class _User_profileState extends State<User_profile> {
 
           ),
         ),
-      ),
 
+      );
+    },
     );
   }
 }

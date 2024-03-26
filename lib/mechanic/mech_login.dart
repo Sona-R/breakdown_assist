@@ -1,5 +1,8 @@
+import 'package:breakdown_assist/mechanic/mech_home.dart';
 import 'package:breakdown_assist/mechanic/mech_signup.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 class Mech_login extends StatefulWidget {
   const Mech_login({super.key});
 
@@ -8,9 +11,25 @@ class Mech_login extends StatefulWidget {
 }
 
 class _Mech_loginState extends State<Mech_login> {
-
+  var usernamectrl = TextEditingController();
+  var passwordctrl = TextEditingController();
 
   final _formkey=GlobalKey<FormState>();
+
+
+
+  String id = '';
+  String username = '';
+  // String location ='';
+  String phone ='';
+  String email ='';
+  String experience ='';
+  String shopname ='';
+
+  // String password ='';
+  String path = '';
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +61,7 @@ class _Mech_loginState extends State<Mech_login> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: usernamectrl,
                     validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter username';
@@ -65,6 +85,7 @@ class _Mech_loginState extends State<Mech_login> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: passwordctrl,
                     obscureText: true,
                     validator:  (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
@@ -100,7 +121,7 @@ class _Mech_loginState extends State<Mech_login> {
                   child: ElevatedButton(onPressed: (){
                     if(_formkey.currentState!.validate()) {
 
-
+                  mechlogin();
 
                     }
 
@@ -145,5 +166,53 @@ class _Mech_loginState extends State<Mech_login> {
 
 
     );
+  }
+
+
+  void mechlogin() async {
+    final mech = await FirebaseFirestore.instance
+        .collection('Mechsignup')
+        .where('email', isEqualTo:usernamectrl.text)
+        .where('password', isEqualTo: passwordctrl.text)
+        .where('status', isEqualTo: 1)
+        .get();
+    if (mech.docs.isNotEmpty) {
+      id = mech.docs[0].id;
+      username = mech.docs[0]['username'];
+      // location = mech.docs[0]['location'];
+      phone = mech.docs[0]['phone'];
+      email = mech.docs[0]['email'];
+      experience = mech.docs[0]['experience'];
+     shopname = mech.docs[0]['shopname'];
+      // password = user.docs[0]['password'];
+      // path = user.docs[0][''];
+
+      SharedPreferences data = await SharedPreferences.getInstance();
+      data.setString('id', id);
+      // data.setString('paath', path);
+
+      data.setString('username', username);
+      // data.setString('location', location);
+      data.setString('phone', phone);
+
+      data.setString('email', email);
+      data.setString('experience', experience);
+      data.setString('shopname', shopname);
+      // data.setString('password', password);
+
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return Mech_home();
+      },
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text(
+        "Username and password error", style: TextStyle(color: Colors.red),
+      )));
+    }
+
+
+
+
   }
 }

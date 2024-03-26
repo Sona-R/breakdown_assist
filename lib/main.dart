@@ -1,9 +1,10 @@
 import 'package:breakdown_assist/admin/admin_login.dart';
 import 'package:breakdown_assist/admin/admin_mechanic.dart';
+import 'package:breakdown_assist/admin/admin_notification.dart';
 import 'package:breakdown_assist/admin/admin_user.dart';
 import 'package:breakdown_assist/firebase_options.dart';
 import 'package:breakdown_assist/mechanic/Mech_home_requests.dart';
-import 'package:breakdown_assist/mechanic/Mech_tab_home.dart';
+
 import 'package:breakdown_assist/mechanic/mech_edit_profile.dart';
 import 'package:breakdown_assist/mechanic/mech_home.dart';
 import 'package:breakdown_assist/mechanic/mech_home_accepted.dart';
@@ -16,8 +17,8 @@ import 'package:breakdown_assist/mechanic/mech_request.dart';
 import 'package:breakdown_assist/mechanic/mech_service.dart';
 import 'package:breakdown_assist/mechanic/mech_service_accept_reject.dart';
 import 'package:breakdown_assist/mechanic/mech_signup.dart';
-import 'package:breakdown_assist/mechanic/mech_status_completed.dart';
-import 'package:breakdown_assist/mechanic/mech_status_reject.dart';
+import 'package:breakdown_assist/mechanic/mech_status.dart';
+
 import 'package:breakdown_assist/splash_scrn.dart';
 import 'package:breakdown_assist/user/user_home.dart';
 import 'package:breakdown_assist/user/user_home__request.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:Mech_home(),
+      home:User_login(),
 
     );
   }

@@ -1,4 +1,10 @@
+import 'package:breakdown_assist/mechanic/mech_edit_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'mech_home.dart';
+
 class Mech_profile extends StatefulWidget {
   const Mech_profile({super.key});
 
@@ -7,7 +13,48 @@ class Mech_profile extends StatefulWidget {
 }
 
 class _Mech_profileState extends State<Mech_profile> {
+
   final formkey=GlobalKey<FormState>();
+  // final namectrl = TextEditingController();
+  var usernamectrl = TextEditingController();
+  var phonectrl = TextEditingController();
+  var emailctrl = TextEditingController();
+  var experiencectrl = TextEditingController();
+  var shopnamectrl = TextEditingController();
+  // final locationctrl = TextEditingController();
+
+  var ID = '';
+  void initState() {
+    // TODO: implement initState
+    getSavedData();
+    super.initState();
+  }
+
+   void getSavedData() async {
+    final prefs = await SharedPreferences.getInstance();
+    ID = prefs.getString('id')!;
+
+
+    // location = prefs.getString('location')!;
+
+    setState(() {});
+  }
+
+  updateprofile()  async{
+    FirebaseFirestore.instance.collection("Mechsignup").doc(ID).update({
+      "username":usernamectrl.text,
+      "phone":phonectrl.text,
+      "email":emailctrl.text,
+      "experience":experiencectrl.text,
+      "shopname":shopnamectrl.text,
+    //   "location":locationctrl.text,
+    });
+    Navigator.pop(
+      context,
+
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,46 +66,49 @@ class _Mech_profileState extends State<Mech_profile> {
               children: [
                 SizedBox(
                   height: 40,
-
                 ),
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: ExactAssetImage("assets/images/man.png"),
+                  backgroundImage: ExactAssetImage("assets/images/person.png"),
                 ),
-
                 SizedBox(
                   height: 30,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 280),
-                  child: Text("Enter Name",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  child: Text(
+                    "Enter Name",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: usernamectrl,
                     validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please enter name';
+                        return 'Please enter username';
                       }
                       return null;
                     },
                     decoration: InputDecoration(
                         hintText: " name",
-
-
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 250),
-                  child: Text("Enter username",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  child: Text(
+                    "Enter username",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    controller: usernamectrl,
                     validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter username';
@@ -67,123 +117,123 @@ class _Mech_profileState extends State<Mech_profile> {
                     },
                     decoration: InputDecoration(
                         hintText: " username",
-
-
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 220),
-                  child: Text("Enter phone number",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  child: Text(
+                    "Enter phone number",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
-                    validator:  (value) {
+                    controller: phonectrl,
+                    validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please Phone number';
+                        return 'Please enter phonenumber';
                       }
                       return null;
                     },
                     decoration: InputDecoration(
                       hintText: " phone number",
-
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
-
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 280),
-                  child: Text("Enter Email",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  child: Text(
+                    "Enter Email",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
-                    validator:  (value) {
+                    controller: emailctrl,
+                    validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please enter email';
+                        return 'Please enter email id';
                       }
                       return null;
                     },
                     decoration: InputDecoration(
                       hintText: "Enter email",
-
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
-
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 170),
-                  child: Text("Enter your work experience",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  child: Text(
+                    "Enter your work experience",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
-                    validator:  (value) {
+                    controller: experiencectrl,
+                    validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please enter Your work experience';
+                        return 'Please enter experience';
                       }
                       return null;
                     },
                     decoration: InputDecoration(
                       hintText: " work experience",
-
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
-
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 170),
-                  child: Text("Enter your work shop name",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  child: Text(
+                    "Enter your work shop name",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
-                    validator:  (value) {
+                    controller: shopnamectrl,
+                    validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
-                        return 'Please enter your work shop name';
+                        return 'Please enter shopname';
                       }
                       return null;
                     },
                     decoration: InputDecoration(
                       hintText: " work shop name",
-
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
-
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 255),
-                  child: Text("Enter location",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                  child: Text(
+                    "Enter location",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    obscureText: true,
-                    validator:  (value) {
+                    // controller: locationctrl,
+                    validator: (value) {
                       if (value == null || value.isEmpty) {   // Validation Logic
                         return 'Please enter location';
                       }
@@ -191,11 +241,9 @@ class _Mech_profileState extends State<Mech_profile> {
                     },
                     decoration: InputDecoration(
                       hintText: "location",
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       ),
-
                     ),
                   ),
                 ),
@@ -206,32 +254,41 @@ class _Mech_profileState extends State<Mech_profile> {
                   width: 300,
                   height: 45,
                   child: ElevatedButton(
-                    onPressed: (){
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    onPressed: () async { if(formkey.currentState!.validate()) {
+
                       if(formkey.currentState!.validate()) {
 
-
+                        updateprofile();
                       }
 
 
+                    }
 
-                    }, child: Text("Submit",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.blue),
+
+                    },
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-
-                  ),
-
                 ),
                 SizedBox(
                   height: 30,
                 ),
-
               ],
             ),
-
           ),
         ),
       ),
-
-
     );
   }
 }

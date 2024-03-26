@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 class User_notification extends StatefulWidget {
   const User_notification({super.key});
@@ -24,48 +25,78 @@ class _User_notificationState extends State<User_notification> {
                 height: 20,
               ),
 
-              Container(
-                height: 1000,
-                width: 390,
-                child: ListView.separated(
-                    separatorBuilder: (context,index)=>Divider(
-                      indent: 13,
-                      endIndent: 60,
-                      color:Colors.white ,
-                      thickness: 20,
-                      height: 50,
-                    ),
-                    itemCount: 3,
-                    itemBuilder: (BuildContext context,int index){
-                      return
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.blueAccent.shade400)
+              FutureBuilder(
+                future: FirebaseFirestore.instance.collection("Notification").get(),
+                builder: (context,AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error:${snapshot.error}"),
+                    );
+                  }
+
+
+                  final notification = snapshot.data?.docs ?? [];
+
+                  return Container(
+                    height: 1000,
+                    width: 390,
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) =>
+                            Divider(
+                              indent: 13,
+                              endIndent: 60,
+                              color: Colors.white,
+                              thickness: 5,
+                              height: 50,
                             ),
-                            height: 120,
-                            width: 150,
-                            child: Column(
-                              children: [
-                                Row(
+                        itemCount: notification.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.blueAccent.shade400)
+                                ),
+                                // height: 120,
+                                // width: 150,
+                                child: Column(
                                   children: [
-                                    Text("  Admin notification"),
-                                    SizedBox(width: 165,),
-                                    Text("10.00 am")
+                                    Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(notification[index]["matter"],style: TextStyle(fontWeight: FontWeight.bold),),
+                                            Text(notification[index]["content"]),
+                                          ],
+                                        ),
+                                       Spacer(),
+                                        Text(notification[index]["time"])
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 290, top: 70),
+                                      child: Text(notification[index]["date"]),
+                                    )
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 265,top: 70),
-                                  child: Text("16/3/2024"),
-                                )
-                              ],
-                            ),
 
-                          ),
-                        );
-                    }
-                ),
+                              ),
+                            );
+                        }
+                    ),
+                  );
+
+                },
               ),
 
 
